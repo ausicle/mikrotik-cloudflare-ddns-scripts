@@ -7,12 +7,9 @@
 :local wanif    "lan1"
 
 # Cloudflare section
-:local email    "e-mail"
-:local key      "token"
+:local apiToken      "token"
 :local zoneId   "zoneId"
 :local hostId   "hostId"
-
-# Domain hostname
 :local hostName "host.yourdomain.com"
 
 # ** END OF CONFIGURE SECTION **
@@ -32,8 +29,8 @@
   :log info "[Cloudflare DDNS] IPv6 address for interface $wanif has been changed to $ip6new."
 
   :local url    "https://api.cloudflare.com/client/v4/zones/$zoneId/dns_records/$hostId"
-  :local header "X-Auth-Email: $email, X-Auth-Key: $key, content-type: application/json"
-  :local data   "{\"type\":\"AAAA\",\"name\":\"$hostName\",\"content\":\"$ip6new\",\"ttl\":120}"
+  :local header "Authorization: Bearer $apiToken, Content-Type: application/json"
+  :local data   "{\"type\":\"AAAA\",\"name\":\"$hostName\",\"content\":\"$ip6new\"}"
 
 #  :log info "[Cloudflare DDNS] URL: $url"
 #  :log info "[Cloudflare DDNS] HEADER: $header"

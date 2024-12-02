@@ -7,12 +7,9 @@
 :local wanif    "wan1"
 
 # Cloudflare section
-:local email    "e-mail"
-:local key      "token"
+:local apiToken      "token"
 :local zoneId   "zoneId"
 :local hostId   "hostId"
-
-# Domain hostname
 :local hostName "host.yourdomain.com"
 
 # ** END OF CONFIGURE SECTION **
@@ -32,8 +29,8 @@
   :log info "[Cloudflare DDNS] WAN IPv4 address for interface $wanif has been changed to $ip4new."
 
   :local url    "https://api.cloudflare.com/client/v4/zones/$zoneId/dns_records/$hostId"
-  :local header "X-Auth-Email: $email, X-Auth-Key: $key, content-type: application/json"
-  :local data   "{\"type\":\"A\",\"name\":\"$hostName\",\"content\":\"$ip4new\",\"ttl\":120}"
+  :local header "Authorization: Bearer $apiToken, Content-Type: application/json"
+  :local data   "{\"type\":\"A\",\"name\":\"$hostName\",\"content\":\"$ip4new\"}"
 
 #  :log info "[Cloudflare DDNS] URL: $url"
 #  :log info "[Cloudflare DDNS] HEADER: $header"
